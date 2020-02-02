@@ -1,14 +1,19 @@
 package main;
 
-import javax.swing.GroupLayout.Alignment;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -16,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import tools.Utils;
 
 public class AppPrototype extends Application{
 	private int defaultXSize = 1280;
@@ -27,7 +31,6 @@ public class AppPrototype extends Application{
 	private Scene settings;
 	private Scene scene1;
 	private Scene scene2;
-	private SubScene hotBar;
 	
 	private Stage stage;
 		
@@ -42,49 +45,56 @@ public class AppPrototype extends Application{
 		//Start
 		stage = primaryStage;
 		stage.initStyle(StageStyle.TRANSPARENT);
-		//stage.setTitle("Engineering Application"); //CHANGE WHEN NEEDED
 		stage.setHeight(defaultYSize);
 		stage.setWidth(defaultXSize);
 		System.out.println("Stage Setup...");
 		stage.show();
 		
-		createBar();
+		setupMain();
 		setupHome();
+
 		stage.setScene(home);
-		Utils.pause(1000);
+		//Utils.pause(1000);
 	}
-	private void setupMain() {
+	
+	private void setupMain() throws FileNotFoundException {
+		Button launch = new Button("Launch Presentation");
+		SubScene hotBar = createBar();
+		BorderPane bp = new BorderPane();
+		Image car = new Image(new FileInputStream("src/images/car.jpg"));
+		ImageView imageView = new ImageView(car);
+		imageView.setFitWidth(1200);
+		imageView.setFitHeight(700);
+		imageView.setPreserveRatio(true);
+		Group imageGroup =  new Group();
 		
+		imageGroup.getChildren().add(imageView);
+		//Add elements
+		bp.setTop(hotBar);
+		bp.setCenter(imageGroup);
+		
+		//Finalise Scene
+		main = new Scene(bp);
+		main.getStylesheets().add("style/mainScreen.css");
+		System.out.println("Main Screen Setup...");
 	}
 	
 	private void setupHome(){
 		Button launch = new Button("Launch Presentation");
-		GridPane gridPane = new GridPane();
-
-		gridPane.setPadding(new Insets(10,10,10,10));
-		gridPane.setAlignment(Pos.CENTER);
-		gridPane.setHgap(200);
+		SubScene hotBar = createBar();
+		launch.setOnAction(e -> buttonPressed());
 		
-		//Add elements
-		gridPane.add(launch,1,1);
-		gridPane.add(hotBar, 0, 0);
-		
-		gridPane.setColumnSpan(hotBar,2);
-		RowConstraints row1 = new RowConstraints();
-		row1.setPercentHeight(3);
-		RowConstraints row2 = new RowConstraints();
-		row2.setPercentHeight(97);
-		gridPane.getRowConstraints().addAll(row1, row2);
-
-		//gridPane.setGridLinesVisible(true);
+		BorderPane bp = new BorderPane();
+		bp.setTop(hotBar);
+		bp.setCenter(launch);
 		
 		//Finalise Scene
-		home = new Scene(gridPane);
+		home = new Scene(bp);
 		home.getStylesheets().add("style/homeScreen.css");
 		System.out.println("Home Screen Setup...");
 	}
 	
-	public void createBar() {
+	public SubScene createBar() {
 		Button settings = new Button("Settings");
 		Button open = new Button("Open");
 		Button newFile = new Button("New");
@@ -92,7 +102,19 @@ public class AppPrototype extends Application{
 		Button max = new Button("MAX");
 		Button min = new Button("MIN");
 		Text title = new Text("INTERACTIVE LEARNING APPLICATION");
+		
+		
+		
+		settings.setOnAction(e -> settingsButtonPressed());
+		open.setOnAction(e -> openFileButtonPressed());
+		newFile.setOnAction(e -> newFileButtonPressed());
+		max.setOnAction(e -> maxButtonPressed());
+		min.setOnAction(e -> minButtonPressed());		
+		
+		close.setOnAction(e -> closeButtonPressed());
+		
 		title.setId("title");
+		
 		title.setTextAlignment(TextAlignment.CENTER);
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(10,10,10,10));
@@ -125,7 +147,31 @@ public class AppPrototype extends Application{
 		gp.getColumnConstraints().addAll(column1,column2,column3
 				,column4,column5,column6,column7);
 		//gp.setGridLinesVisible(true);
-		hotBar = new SubScene(gp, defaultXSize, defaultYSize/20);
+		SubScene hotBar = new SubScene(gp, defaultXSize, defaultYSize/20);
 		//hotBar.setUserAgentStylesheet("style/homeScreen.css");
+		return hotBar;
 	}
+	public void buttonPressed() {
+		stage.setScene(main);
+	}
+	public void maxButtonPressed() {
+		stage.setMaximized(true);
+		defaultXSize = 1920;
+	}
+	public void minButtonPressed() {
+		System.out.println("Minimized");
+	}
+	public void openFileButtonPressed() {
+		System.out.println("Open File Button Pressed...");
+	}
+	public void newFileButtonPressed() {
+		System.out.println("New File Button Pressed...");
+	}
+	public void settingsButtonPressed() {
+		System.out.println("Settings Button Pressed...");
+	}
+	public void closeButtonPressed() {
+		System.exit(0);
+	}
+	
 }
