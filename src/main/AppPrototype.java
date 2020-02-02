@@ -53,20 +53,22 @@ public class AppPrototype extends Application{
 		stage.setScene(home);
 		Utils.pause(1000);
 	}
-
+	private void setupMain() {
+		
+	}
+	
 	private void setupHome(){
-		Text title = new Text("Engineering Application!");
-		title.setId("title");
+		Button launch = new Button("Launch Presentation");
 		GridPane gridPane = new GridPane();
 
 		gridPane.setPadding(new Insets(10,10,10,10));
 		gridPane.setAlignment(Pos.CENTER);
-		//gridPane.setVgap(660);
+		gridPane.setHgap(200);
 		
 		//Add elements
-		gridPane.add(title,1,1);
-		
+		gridPane.add(launch,1,1);
 		gridPane.add(hotBar, 0, 0);
+		
 		gridPane.setColumnSpan(hotBar,2);
 		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(3);
@@ -78,7 +80,7 @@ public class AppPrototype extends Application{
 		
 		//Finalise Scene
 		home = new Scene(gridPane);
-		//home.getStylesheets().add("style/homeScreen.css");
+		home.getStylesheets().add("style/homeScreen.css");
 		System.out.println("Home Screen Setup...");
 	}
 	
@@ -89,7 +91,8 @@ public class AppPrototype extends Application{
 		Button close = new Button("X");
 		Button max = new Button("MAX");
 		Button min = new Button("MIN");
-		Text title = new Text("BINGO BONGO!!!!!!");
+		Text title = new Text("INTERACTIVE LEARNING APPLICATION");
+		title.setId("title");
 		title.setTextAlignment(TextAlignment.CENTER);
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(10,10,10,10));
@@ -123,5 +126,6 @@ public class AppPrototype extends Application{
 				,column4,column5,column6,column7);
 		//gp.setGridLinesVisible(true);
 		hotBar = new SubScene(gp, defaultXSize, defaultYSize/20);
+		//hotBar.setUserAgentStylesheet("style/homeScreen.css");
 	}
 }
