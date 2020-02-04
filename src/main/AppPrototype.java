@@ -75,7 +75,7 @@ public class AppPrototype extends Application{
 		
 		//Finalise Scene
 		main = new Scene(bp);
-		main.getStylesheets().add("style/mainScreen.css");
+		//main.getStylesheets().add("style/mainScreen.css");
 		System.out.println("Main Screen Setup...");
 	}
 	
@@ -90,7 +90,7 @@ public class AppPrototype extends Application{
 		
 		//Finalise Scene
 		home = new Scene(bp);
-		home.getStylesheets().add("style/homeScreen.css");
+		//home.getStylesheets().add("style/homeScreen.css");
 		System.out.println("Home Screen Setup...");
 	}
 	
