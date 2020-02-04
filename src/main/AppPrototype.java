@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -99,9 +102,27 @@ public class AppPrototype extends Application{
 		System.out.println("Home Screen Setup...");
 	}
 	
-	private Scene setupContentScreen(String title) throws FileNotFoundException {
-		SubScene hotBar = HotBar.createBar(title, defaultXSize, defaultYSize/20);
-		Text mainText =  new Text("NVJKNRSKJVNEJKNAVJKNEKJANVJLKNELJKANVJKENAJVNEJNVKENANEVKNEKV");
+	private Scene setupContentScreen(String sceneName) throws FileNotFoundException {
+		Text mainText = new Text();
+		Text sceneTitle = new Text();
+		
+		
+		System.out.println("ROOT NODE:" + xmlDoc.getDocumentElement().getNodeName());
+		NodeList nList = xmlDoc.getElementsByTagName(sceneName);
+		for(int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			System.out.println("\nCurrent Element :" + nNode.getNodeName());
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				System.out.println("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent());
+				System.out.println("Body : " + eElement.getElementsByTagName("body").item(0).getTextContent());
+				mainText =  new Text(eElement.getElementsByTagName("body").item(0).getTextContent());
+				sceneTitle = new Text(eElement.getElementsByTagName("title").item(0).getTextContent());
+			}
+		}
+		
+		SubScene hotBar = HotBar.createBar(sceneTitle.getText(), defaultXSize, defaultYSize/20);
+		//mainText =  new Text(eElement.getElementsByTagName("body").item(0).getTextContent());
 		mainText.setWrappingWidth(defaultXSize/2);
 		
 		BorderPane bp = new BorderPane();
@@ -121,7 +142,7 @@ public class AppPrototype extends Application{
 		//Finalise Scene
 		Scene scene = new Scene(bp);
 		scene.getStylesheets().add("style/contentScreen.css");
-		System.out.println(title + " Screen Setup...");
+		System.out.println(sceneName + " Screen Setup...");
 		return scene;
 	}
 	

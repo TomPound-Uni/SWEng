@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<note>
-	<to>Tove</to>
-	<from>Jani</from>
-	<heading>Reminder</heading>
-	<body>Don't forget me this weekend!</body>
-</note>
+
+
+
+<application>
+	<config>
+		<width></width>
+		<height></height>
+	</config>
+	
+	<home>
+		<title> HOME SCENE </title>
+		<body></body>
+	</home>
+	
+	<main>
+		<title> MAIN SCENE </title>
+		<body></body>
+	</main>
+	
+	<scene1>
+		<title> SCENE1 </title>
+		<body>THIS IS SCENE ONE AND BY GOLLY DOES IT LOOK YUMMY</body>
+	</scene1>
+	
+	<scene2>
+		<title> SCENE2 </title>
+		<body>GUESS THIS IS SCENE TWO THEN BUT ITS STILL PRETTY COOL</body>
+	</scene2>
+</application>
