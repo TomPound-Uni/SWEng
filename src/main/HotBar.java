@@ -64,7 +64,7 @@ public class HotBar {
 				,column4,column5,column6,column7);
 		//gp.setGridLinesVisible(true);
 		SubScene hotBar = new SubScene(gp, width, height);
-		//hotBar.setUserAgentStylesheet("style/homeScreen.css");
+		hotBar.setUserAgentStylesheet("style/hotBar.css");
 		return hotBar;
 	}
 	public static void maxButtonPressed() {
@@ -77,6 +77,7 @@ public class HotBar {
 	}
 	public static void openFileButtonPressed() {
 		System.out.println("Open File Button Pressed...");
+		AppPrototype.buttonPressed();
 	}
 	public static void newFileButtonPressed() {
 		System.out.println("New File Button Pressed...");
