@@ -1,1 +1,39 @@
-XML
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<application>
+	<config>
+		<width></width>
+		<height></height>
+	</config>
+	<scenes>
+		<home>
+			<title> HOME SCENE </title>
+			<body></body>
+		</home>
+
+		<main>
+			<title> MAIN SCENE </title>
+			<body></body>
+			<tdmodel>URL</tdmodel>
+		</main>
+
+		<settings>
+			<title> SETTINGS </title>
+			<body> THIS IS THE SETTINGS PAGE BTW</body>
+		</settings>
+
+		<scene1>
+			<title> SCENE1 </title>
+			<body>THIS IS SCENE ONE AND BY GOLLY DOES IT LOOK YUMMY</body>
+			<tdmodel>URL</tdmodel>
+		</scene1>
+
+		<scene2>
+			<title> SCENE2 </title>
+			<body>GUESS THIS IS SCENE TWO THEN BUT ITS STILL PRETTY COOL</body>
+			<tdmodel>URL</tdmodel>
+		</scene2>
+	</scenes>
+</application>
