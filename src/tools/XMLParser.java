@@ -7,8 +7,6 @@ public class XMLParser {
 
 	
 	private static Document getDocument(String name) {
-		
-		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setIgnoringComments(true);
 		factory.setIgnoringElementContentWhitespace(true);
