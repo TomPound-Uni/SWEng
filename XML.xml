@@ -16,7 +16,7 @@
 		<main>
 			<title> MAIN SCENE </title>
 			<body></body>
-			<3dmodel>URL</3dmodel>
+			<tdmodel>URL</tdmodel>
 		</main>
 
 		<settings>
@@ -27,13 +27,13 @@
 		<scene1>
 			<title> SCENE1 </title>
 			<body>THIS IS SCENE ONE AND BY GOLLY DOES IT LOOK YUMMY</body>
-			<3dmodel>URL</3dmodel>
+			<tdmodel>URL</tdmodel>
 		</scene1>
 
 		<scene2>
 			<title> SCENE2 </title>
 			<body>GUESS THIS IS SCENE TWO THEN BUT ITS STILL PRETTY COOL</body>
-			<3dmodel>URL</3dmodel>
+			<tdmodel>URL</tdmodel>
 		</scene2>
 	</scenes>
 </application>
