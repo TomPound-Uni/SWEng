@@ -226,7 +226,8 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 
 //TODO
 /*Cursor image change
-Resize Window
+Resize Window (Area in the bottom corner)
 Create button behaviour file
 Create 3D model viewer
+
 */
