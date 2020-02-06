@@ -132,32 +132,40 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 		System.out.println("Main Screen Setup...");
 	}
 	
+	//Setup Home screen
 	private void setupHome(){
 		Button launch = new Button("Launch Presentation");
-		SubScene hotBar = HotBar.createBar("Home Screen", defaultXSize, defaultYSize/20);
-		launch.setOnAction(e -> buttonPressed());
+		SubScene hotBar = HotBar.createBar("Home Screen", defaultXSize, defaultYSize/20); //Create hotbar for this scene
+		launch.setOnAction(e -> buttonPressed()); //Event Listener for launch button
 		
-		BorderPane bp = new BorderPane();
+		BorderPane bp = new BorderPane(); //New layout
 		bp.setTop(hotBar);
 		bp.setCenter(launch);
 		
 		//Finalise Scene
 		home = new Scene(bp);
-		home.getStylesheets().add("style/homeScreen.css");
+		home.getStylesheets().add("style/homeScreen.css"); //Get styling from css sheet
 		System.out.println("Home Screen Setup...");
 	}
 	
+	//Setup universal content screen
 	private Scene setupContentScreen(String sceneName) throws FileNotFoundException {
 		Text mainText = new Text();
 		Text sceneTitle = new Text();
+
+		//Cycle through the XML file for specific tags
 		System.out.println("ROOT NODE:" + xmlDoc.getDocumentElement().getNodeName());
-		NodeList nList = xmlDoc.getElementsByTagName(sceneName);
-		System.out.println("LIST" + nList.getLength());
+		NodeList nList = xmlDoc.getElementsByTagName(sceneName); //Creates list of nodes of tags
+		System.out.println("LIST" + nList.getLength()); //Finds amount of tags
+
+		//Cycle through the tags to find specific attributes
+		//This was found online for practice
 		for(int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
+			Node nNode = nList.item(temp); //Update node
 			System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
 			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
+				Element eElement = (Element) nNode; //Split into elements
 				System.out.println("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent());
 				System.out.println("Body : " + eElement.getElementsByTagName("body").item(0).getTextContent());
 				mainText =  new Text(eElement.getElementsByTagName("body").item(0).getTextContent());
@@ -165,10 +173,10 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 			}
 		}
 		
-		SubScene hotBar = HotBar.createBar(sceneTitle.getText(), defaultXSize, defaultYSize/20);
+		SubScene hotBar = HotBar.createBar(sceneTitle.getText(), defaultXSize, defaultYSize/20); //Create hot bad for this specific scene
 		//mainText =  new Text(eElement.getElementsByTagName("body").item(0).getTextContent());
-		mainText.setWrappingWidth(defaultXSize/2);
-		mainText.setId("body");
+		mainText.setWrappingWidth(defaultXSize/2); //Wraps text at correct width
+		mainText.setId("body"); //Set CSS ID TAG for styling of just this element
 		
 		BorderPane bp = new BorderPane();
 		
@@ -191,7 +199,7 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 		return scene;
 	}
 	
-
+	//Example button listener which cycles through the scenes
 	public static void buttonPressed() {
 		if(sceneNo == 0) {
 			stage.setScene(home);
@@ -215,3 +223,10 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 	}
 	
 }
+
+//TODO
+/*Cursor image change
+Resize Window
+Create button behaviour file
+Create 3D model viewer
+*/
