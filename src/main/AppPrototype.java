@@ -180,20 +180,20 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 		
 		BorderPane bp = new BorderPane();
 		
-		Image car = new Image(new FileInputStream("src/images/car.jpg"));
+		Image car = new Image(new FileInputStream("src/images/car.jpg")); //Adding an image from a file
 		ImageView imageView = new ImageView(car);
 		imageView.setFitWidth(defaultXSize/2);
 		imageView.setPreserveRatio(true);
-		Group imageGroup =  new Group();
+		Group imageGroup =  new Group(); //Add to a group of elements
 		
-		imageGroup.getChildren().add(imageView);
+		imageGroup.getChildren().add(imageView); //Add image to group
 		//Add elements
 		bp.setTop(hotBar);
 		bp.setLeft(imageGroup);
 		bp.setRight(mainText);
 		
 		//Finalise Scene
-		Scene scene = new Scene(bp);
+		Scene scene = new Scene(bp); //Create scene
 		scene.getStylesheets().add("style/contentScreen.css");
 		System.out.println(sceneName + " Screen Setup...");
 		return scene;
