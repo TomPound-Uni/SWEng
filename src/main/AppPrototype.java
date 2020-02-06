@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+//XML COMPONENTS
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+//JAVAFX COMPONENTS
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -25,30 +27,35 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import tools.*;
 
-public class AppPrototype extends Application{
+public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 	private int defaultXSize = 1280;
 	private int defaultYSize = 720;
 	
+	//Global Scene Names
 	private static Scene home;
 	private static Scene main;
 	private static Scene settings;
 	private static Scene scene1;
 	private static Scene scene2;
 	
+	//Stage for the application
 	private static Stage stage;
-	
+	//Screen No. Tracker
 	private static int sceneNo = 1;
 	
+	//Document to Load XML in memory
 	private Document xmlDoc;
-	
+
+	//Current screen offset
 	private double yOffset = 0;
 	private double xOffset = 0;
 	
+	//Inbuilt file viewer, dependent on OS
 	private FileChooser fc = new FileChooser();
 		
 	public static void main(String[] args) {
 		System.out.println("Application Started...");
-		launch(args);
+		launch(args);	//Launch application
 		System.out.println("Application Finished...");
 	}
 
@@ -58,32 +65,38 @@ public class AppPrototype extends Application{
 		xmlDoc = XMLParser.getDocument("XML.xml");
 		xmlDoc.getDocumentElement().normalize();
 		//Start
-		stage = primaryStage;
-		stage.initStyle(StageStyle.TRANSPARENT);
+		stage = primaryStage;	//Create stage (Frame)
+		stage.initStyle(StageStyle.TRANSPARENT); //Remove bar at the top if window
+		//Set dimensions
 		stage.setHeight(defaultYSize);
 		stage.setWidth(defaultXSize);
 		System.out.println("Stage Setup...");
-		stage.show();
+		stage.show(); //Show stage
 		
+		//Setup Scenes
 		setupMain();
 		setupHome();
 		settings = setupContentScreen("settings");
 		scene1 = setupContentScreen("scene1");
 		scene2 = setupContentScreen("scene2");
 		
+		//Open file viewer and save selected file
 		File file = fc.showOpenDialog(stage);
 
 		//COULD USE A FOR LOOP FOR ALL THE SCREEN TAGS HERE
 		//AUTOMATICALLY CREATES THE CORRECT AMOUNT OF SCREENS
 		
-		stage.setScene(home);
+		stage.setScene(home); //Set initial scene in frame
 		//Utils.pause(1000);
 	}
 	
-	private void setupMain() throws FileNotFoundException {
 
+	//Setup main screen
+	private void setupMain() throws FileNotFoundException {
 		Button launch = new Button("Launch Presentation");
 		SubScene hotBar = HotBar.createBar("Main Screen", defaultXSize, defaultYSize/20);
+		//Get mouse press coords and offset
+		//USE GETTERS AND SETTERS FOR SCREEN OFFSET
 		hotBar.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -91,6 +104,7 @@ public class AppPrototype extends Application{
 				yOffset = event.getSceneY();
 			}
 		});
+		//Move window with mouse
 		hotBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -98,6 +112,7 @@ public class AppPrototype extends Application{
 				stage.setY(event.getScreenY() - yOffset);	
 			}
 		});
+
 		BorderPane bp = new BorderPane();
 		Image car = new Image(new FileInputStream("src/images/car.jpg"));
 		ImageView imageView = new ImageView(car);
@@ -108,12 +123,12 @@ public class AppPrototype extends Application{
 		
 		imageGroup.getChildren().add(imageView);
 		//Add elements
-		bp.setTop(hotBar);
+		bp.setTop(hotBar); //Apply layout (Set hotbar at the top of the screen)
 		bp.setCenter(imageGroup);
 		
 		//Finalise Scene
-		main = new Scene(bp);
-		main.getStylesheets().add("style/mainScreen.css");
+		main = new Scene(bp); //Create new scene with elements from above
+		main.getStylesheets().add("style/mainScreen.css"); //Use style from css sheet
 		System.out.println("Main Screen Setup...");
 	}
 	
