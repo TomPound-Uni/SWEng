@@ -81,7 +81,7 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 		scene2 = setupContentScreen("scene2");
 		
 		//Open file viewer and save selected file
-		File file = fc.showOpenDialog(stage);
+		//File file = fc.showOpenDialog(stage);
 
 		//COULD USE A FOR LOOP FOR ALL THE SCREEN TAGS HERE
 		//AUTOMATICALLY CREATES THE CORRECT AMOUNT OF SCREENS
