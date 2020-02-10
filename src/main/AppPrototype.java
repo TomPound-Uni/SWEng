@@ -136,6 +136,21 @@ public class AppPrototype extends Application{ //EXTENDS JAVAFX APPLICATION
 	private void setupHome(){
 		Button launch = new Button("Launch Presentation");
 		SubScene hotBar = HotBar.createBar("Home Screen", defaultXSize, defaultYSize/20); //Create hotbar for this scene
+		hotBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = event.getSceneX();
+				yOffset = event.getSceneY();
+			}
+		});
+		//Move window with mouse
+		hotBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stage.setX(event.getScreenX() - xOffset);
+				stage.setY(event.getScreenY() - yOffset);	
+			}
+		});
 		launch.setOnAction(e -> buttonPressed()); //Event Listener for launch button
 		
 		BorderPane bp = new BorderPane(); //New layout

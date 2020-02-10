@@ -88,4 +88,5 @@ public class HotBar {
 	public static void closeButtonPressed() {
 		System.exit(0);
 	}
+	
 }
