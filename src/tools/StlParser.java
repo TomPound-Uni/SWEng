@@ -18,16 +18,8 @@ public class StlParser {
 			while(facet_scanner.next() != null) {
 				System.out.println(facet_scanner.next()); 
 			}
-			
-			
 		}else{
 			System.out.print("File type is not supported");
-		}
-		
-		
-		
+		}	
 	}
-	
-	
-	
 }
